@@ -32,22 +32,28 @@ int main(int argc, char *argv[]) {
   Canvas *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL) return 1;
 
+  FrameCanvas *offscreen_canvas = canvas->CreateFrameCanvas();
+
   const int width = canvas->width();
   const int height = canvas->height();
   uint8_t count = 0;
 
   while (!interrupt_received) {
 
+    offscreen_canvas->Clear();
+
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
         int c = (count + y) % 128;
 
-        canvas->SetPixel(x, y, c, c, c);
+        offscreen_canvas->SetPixel(x, y, c, c, c);
 
       }
     }
     
+    offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
+
     count++;
     sleep(1 / 10);
 
