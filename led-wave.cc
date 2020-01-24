@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
   Canvas *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL) return 1;
 
-  const int width = canvas()->width();
-  const int height = canvas()->height();
+  const int width = canvas->width();
+  const int height = canvas->height();
   uint8_t count = 0;
 
   while (!interrupt_received) {
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
         int c = (count + y) % 255;
         if (c > 128) c = 255 - c;
 
-        canvas()->SetPixel(x, y, c, c, c);
+        canvas->SetPixel(x, y, c, c, c);
 
       }
     }
@@ -59,7 +59,6 @@ int main(int argc, char *argv[]) {
   // 
 
   canvas->Clear();
-  delete image_gen;
   delete canvas;
 
   return 0;
