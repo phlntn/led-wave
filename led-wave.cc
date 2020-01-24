@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
   defaults.hardware_mapping = "adafruit-hat-pwm";
   defaults.cols = 64;
   defaults.rows = 64;
-  defaults.chain_length = 3;
+  defaults.chain_length = 4;
   defaults.parallel = 1;
   defaults.show_refresh_rate = false;
 
@@ -57,6 +57,7 @@ int main(int argc, char *argv[]) {
 
         float a = (float)cy / (float)height;
         a *= a;
+        a *= 0.1;
 
         int cx = (count + x) % (3 * 255);
         int r = 0, g = 0, b = 0;
