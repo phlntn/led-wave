@@ -48,11 +48,24 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        float a = 0.1f;
+        // float a = 1.0f;
 
-        int r = 255 * a;
-        int g = 255 * a;
-        int b = 255 * a;
+        count %= 3 * 255;
+        int r = 0, g = 0, b = 0;
+
+        if (count <= 255) {
+          int c = count;
+          b = 255 - c;
+          r = c;
+        } else if (count > 255 && count <= 511) {
+          int c = count - 256;
+          r = 255 - c;
+          g = c;
+        } else {
+          int c = count - 512;
+          g = 255 - c;
+          b = c;
+        }
 
         offscreen_canvas->SetPixel(x, y, r, g, b);
 
