@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 
   const int width = canvas->width();
   const int height = canvas->height();
-  uint8_t count = 0;
+  uint32_t count = 0;
 
   while (!interrupt_received) {
 
