@@ -6,6 +6,10 @@
 #include <stdio.h>
 #include <signal.h>
 
+using std::min;
+using std::max;
+using std::abs;
+
 using namespace rgb_matrix;
 
 volatile bool interrupt_received = false;
@@ -56,7 +60,7 @@ int main(int argc, char *argv[]) {
         }
 
         float a = (float)cy / (float)height;
-        // a *= a;
+        a *= abs(1.0f - a * 2.0f) * 0.5f + 0.5f;
         // a *= 0.5f;
 
         int cx = (count + x) % (3 * 255);
@@ -82,7 +86,7 @@ int main(int argc, char *argv[]) {
 
     offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
 
-    usleep(1000 * 100);
+    usleep(1000 * 20);
 
   }
 
