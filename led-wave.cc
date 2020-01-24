@@ -41,8 +41,7 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int c = (count + y) % 255;
-        if (c > 128) c = 255 - c;
+        int c = (count + y) % 64;
 
         canvas->SetPixel(x, y, c, c, c);
 
