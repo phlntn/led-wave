@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 
     offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
 
-    usleep(1000f / 30f);
+    usleep(1000.0f / 30.0f);
 
   }
 
