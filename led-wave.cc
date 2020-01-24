@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
         float a = (float)cy / (float)height;
         // a *= a;
-        a *= 0.1f;
+        // a *= 0.5f;
 
         int cx = (count + x) % (3 * 255);
         int r = 0, g = 0, b = 0;
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 
     offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
 
-    usleep(1000 * 5);
+    usleep(1000 * 10);
 
   }
 
