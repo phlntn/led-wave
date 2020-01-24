@@ -13,9 +13,7 @@
 #include <stdio.h>
 #include <signal.h>
 
-using rgb_matrix::GPIO;
-using rgb_matrix::RGBMatrix;
-using rgb_matrix::Canvas;
+using namespace rgb_matrix;
 
 volatile bool interrupt_received = false;
 static void InterruptHandler(int signo) {
@@ -59,7 +57,7 @@ int main(int argc, char *argv[]) {
   defaults.parallel = 1;
   defaults.show_refresh_rate = true;
 
-  Canvas *canvas = rgb_matrix::CreateMatrixFromFlags(&argc, &argv, &defaults);
+  Canvas *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL)
     return 1;
 
