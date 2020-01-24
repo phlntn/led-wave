@@ -53,14 +53,14 @@ int main(int argc, char *argv[]) {
         int c = (count + x) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
-        if (c >= 0 && c <= 255) {
+        if (c <= 255) {
           r = c;
           b = 255 - c;
-        } else if (c > 255 & c <= 511) {
-          r = 512 - c;
+        } else if (c <= 511) {
+          r = 511 - c;
           g = c - 255;
-        } else if (c > 511 & c <= 765) {
-          g = 766 - c;
+        } else (c <= 765) {
+          g = 765 - c;
           b = c - 511;
         }
 
