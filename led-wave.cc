@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 
         // float a = sin( ( (float)y + (float)count * 0.05f) / (float)height ) * 0.5f + 0.5;
 
-        float a = sin( (float)y / (float)height + M_PI);
+        float a = sin( (float)y / (float)height * M_PI);
 
         // int off = round(sin((float)count * 0.05f) * 200.0f * (1.0f - a));
 
