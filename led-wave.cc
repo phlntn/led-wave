@@ -61,10 +61,10 @@ int main(int argc, char *argv[]) {
 
         float a = (float)cy / (float)height;
         // a *= abs(1.0f - a * 2.0f) * 0.5f + 0.5f;
-        a *= 1.0f - a;
+        a *= a;
         // a *= 0.5f;
 
-        int cx = (count + x) % (3 * 255);
+        int cx = (count + x * 1.5f) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (cx <= 255) {
