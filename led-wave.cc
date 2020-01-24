@@ -9,6 +9,8 @@
 using std::min;
 using std::max;
 using std::abs;
+using std::cos;
+using std::sin;
 
 using namespace rgb_matrix;
 
@@ -37,7 +39,7 @@ int main(int argc, char *argv[]) {
   RGBMatrix *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL) return 1;
 
-  canvas->SetBrightness(100);
+  // canvas->SetBrightness(100);
 
   FrameCanvas *offscreen_canvas = canvas->CreateFrameCanvas();
 
@@ -59,12 +61,13 @@ int main(int argc, char *argv[]) {
         //   cy = (height * 2) - cy;
         // }
 
-        // float a = (float)cy / (float)height;
+        float a = (float)y / (float)height;
+        a = a / 2.0f + 0.5f;
         // a *= abs(1.0f - a * 2.0f) * 0.5f + 0.5f;
         // a *= a;
         // a *= 0.5f;
 
-        int cx = (count + x * 2 + y) % (3 * 255);
+        int cx = (count + x * 2 + y * 2) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (cx <= 255) {
@@ -78,8 +81,8 @@ int main(int argc, char *argv[]) {
           b = cx - 512;
         }
 
-        // offscreen_canvas->SetPixel(x, y, r * a, g * a, b * a);
-        offscreen_canvas->SetPixel(x, y, r, g, b);
+        offscreen_canvas->SetPixel(x, y, r * a, g * a, b * a);
+        // offscreen_canvas->SetPixel(x, y, r, g, b);
 
       }
     }
