@@ -1,4 +1,5 @@
 #include "led-matrix.h"
+#include "graphics.h"
 
 #include <unistd.h>
 #include <math.h>
