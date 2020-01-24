@@ -6,6 +6,7 @@
 // (but note, that the led-matrix library this depends on is GPL v2)
 
 #include "led-matrix.h"
+#include "threaded-canvas-manipulator.h"
 
 #include <unistd.h>
 #include <math.h>
@@ -21,27 +22,33 @@ static void InterruptHandler(int signo) {
   interrupt_received = true;
 }
 
-static void DrawOnCanvas(Canvas *canvas) {
-  /*
-   * Let's create a simple animation. We use the canvas to draw
-   * pixels. We wait between each step to have a slower animation.
-   */
-  // canvas->Fill(0, 0, 255);
-
-  int center_x = canvas->width() / 2;
-  int center_y = canvas->height() / 2;
-  float radius_max = canvas->width() / 2;
-  float angle_step = 1.0 / 360;
-  for (float a = 0, r = 0; r < radius_max; a += angle_step, r += angle_step) {
-    if (interrupt_received)
-      return;
-    float dot_x = cos(a * 2 * M_PI) * r;
-    float dot_y = sin(a * 2 * M_PI) * r;
-    canvas->SetPixel(center_x + dot_x, center_y + dot_y,
-                     255, 0, 0);
-    usleep(1 * 1000);  // wait a little to slow down things.
+class GrayScaleBlock : public ThreadedCanvasManipulator {
+public:
+  GrayScaleBlock(Canvas *m) : ThreadedCanvasManipulator(m) {}
+  void Run() {
+    const int sub_blocks = 16;
+    const int width = canvas()->width();
+    const int height = canvas()->height();
+    const int x_step = max(1, width / sub_blocks);
+    const int y_step = max(1, height / sub_blocks);
+    uint8_t count = 0;
+    while (running() && !interrupt_received) {
+      for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+          int c = sub_blocks * (y / y_step) + x / x_step;
+          switch (count % 4) {
+          case 0: canvas()->SetPixel(x, y, c, c, c); break;
+          case 1: canvas()->SetPixel(x, y, c, 0, 0); break;
+          case 2: canvas()->SetPixel(x, y, 0, c, 0); break;
+          case 3: canvas()->SetPixel(x, y, 0, 0, c); break;
+          }
+        }
+      }
+      count++;
+      sleep(2);
+    }
   }
-}
+};
 
 int main(int argc, char *argv[]) {
   RGBMatrix::Options defaults;
@@ -50,7 +57,7 @@ int main(int argc, char *argv[]) {
   defaults.rows = 64;
   defaults.chain_length = 3;
   defaults.parallel = 1;
-  // defaults.show_refresh_rate = true;
+  defaults.show_refresh_rate = true;
 
   Canvas *canvas = rgb_matrix::CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL)
@@ -62,7 +69,8 @@ int main(int argc, char *argv[]) {
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
 
-  DrawOnCanvas(canvas);    // Using the canvas.
+  image_gen = new GrayScaleBlock(canvas);
+  image_gen->Start();
 
   // Animation finished. Shut down the RGB matrix.
   canvas->Clear();
