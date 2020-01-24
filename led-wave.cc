@@ -53,6 +53,8 @@ public:
 
 int main(int argc, char *argv[]) {
   RGBMatrix::Options defaults;
+  
+  // These are the defaults when no command-line flags are given.
   defaults.hardware_mapping = "adafruit-hat-pwm";  // or e.g. "adafruit-hat"
   defaults.cols = 64;
   defaults.rows = 64;
@@ -70,11 +72,24 @@ int main(int argc, char *argv[]) {
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
 
+  // The ThreadedCanvasManipulator objects are filling
+  // the matrix continuously.
   ThreadedCanvasManipulator *image_gen = new GrayScaleBlock(canvas);
+
+  // Image generating demo is crated. Now start the thread.
   image_gen->Start();
+
+  // Now, the image generation runs in the background. We can do arbitrary
+  // things here in parallel. In this demo, we're essentially just
+  // waiting for one of the conditions to exit.
+  printf("Press <CTRL-C> to exit and reset LEDs\n");
+  while (!interrupt_received) {
+    sleep(1); // Time doesn't really matter. The syscall will be interrupted.
+  }
 
   // Animation finished. Shut down the RGB matrix.
   canvas->Clear();
+  delete image_gen;
   delete canvas;
 
   return 0;
