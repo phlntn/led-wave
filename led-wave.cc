@@ -59,12 +59,12 @@ int main(int argc, char *argv[]) {
         if (c <= 255) {
           r = c;
           b = 255 - c;
-        } else if (c > 255 && c <= 511) {
-          r = 0 - c;
-          g = c - 256;
+        } else if (c <= 511) {
+          r = 512 - c;
+          g = c - 255;
         } else {
-          g = -257 - c;
-          b = c - 512;
+          g = 766 - c;
+          b = c - 511;
         }
 
         offscreen_canvas->SetPixel(x, y, r, g, b);
