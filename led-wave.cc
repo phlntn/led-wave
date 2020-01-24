@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 
         // float a = 1.0f;
 
-        int c = (count + x) % 3 * 255;
+        int c = (count + x) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (c >= 0 && c <= 255) {
