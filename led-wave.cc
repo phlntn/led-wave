@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
         a *= a;
         // a *= 0.5f;
 
-        int cx = (count + x * 2) % (3 * 255);
+        int cx = (count + x * 2 + y / 2) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (cx <= 255) {
