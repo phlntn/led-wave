@@ -56,15 +56,15 @@ int main(int argc, char *argv[]) {
         int r = 0, g = 0, b = 0;
 
         if (count <= 255) {
-          int c = count;
+          int c = count + x;
           b = 255 - c;
           r = c;
         } else if (count > 255 && count <= 511) {
-          int c = count - 256;
+          int c = count - 256 + x;
           r = 255 - c;
           g = c;
         } else {
-          int c = count - 512;
+          int c = count - 512 + x;
           g = 255 - c;
           b = c;
         }
