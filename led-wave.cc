@@ -1,5 +1,4 @@
 #include "led-matrix.h"
-#include "graphics.h"
 
 #include <unistd.h>
 #include <math.h>
@@ -32,8 +31,6 @@ int main(int argc, char *argv[]) {
 
   Canvas *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL) return 1;
-
-  canvas->SetBrightness(100);
 
   const int width = canvas->width();
   const int height = canvas->height();
