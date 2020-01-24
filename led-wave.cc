@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
   defaults.rows = 64;
   defaults.chain_length = 3;
   defaults.parallel = 1;
-  defaults.show_refresh_rate = true;
+  defaults.show_refresh_rate = false;
 
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
@@ -32,6 +32,8 @@ int main(int argc, char *argv[]) {
   Canvas *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL) return 1;
 
+  canvas->SetBrightness(100);
+
   const int width = canvas->width();
   const int height = canvas->height();
   uint8_t count = 0;
@@ -41,7 +43,7 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int c = (count + y) % 64;
+        int c = (count + y) % 128;
 
         canvas->SetPixel(x, y, c, c, c);
 
@@ -49,7 +51,7 @@ int main(int argc, char *argv[]) {
     }
     
     count++;
-    sleep(1 / 30);
+    sleep(1 / 10);
 
   }
 
