@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
         // a *= a;
         // a *= 0.5f;
 
-        int off = round(sin((float)count * 0.01f) * 100.0f);
+        int off = round(sin((float)count * 0.05f) * 200.0f);
 
         int cx = (count + x * 2 + off) % (3 * 255);
         int r = 0, g = 0, b = 0;
