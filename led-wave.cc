@@ -39,6 +39,7 @@ int main(int argc, char *argv[]) {
 
   const int width = canvas->width();
   const int height = canvas->height();
+
   uint32_t count = 0;
 
   while (!interrupt_received) {
@@ -48,9 +49,13 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        // int cy = (count + y) % ?
-        float a = 0.5f;
+        int cy = (count + y) % (height * 2);
 
+        if (cy > height) {
+          cy = (height * 2) - cy;
+        }
+
+        float a = cy / height;
 
         int cx = (count + x / 2) % (3 * 255);
         int r = 0, g = 0, b = 0;
@@ -75,7 +80,7 @@ int main(int argc, char *argv[]) {
 
     offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
 
-    sleep(1 / 10);
+    sleep(1 / 5);
 
   }
 
