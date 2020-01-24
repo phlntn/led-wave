@@ -40,6 +40,8 @@ public:
         for (int x = 0; x < width; ++x) {
 
           int c = (count + y) % 255;
+          if (c > 128) c = 255 - c;
+          
           canvas()->SetPixel(x, y, c, c, c);
 
           // int c = sub_blocks * (y / y_step) + x / x_step;
@@ -53,7 +55,7 @@ public:
         }
       }
       count++;
-      sleep(1 / 60);
+      sleep(1 / 30);
     }
 
   }
