@@ -58,6 +58,7 @@ int main(int argc, char *argv[]) {
 
         float a = sin( ( (float)y + (float)count * 0.5f) / (float)height * M_PI);
         a = abs(a);
+        a *= a;
 
         int cx = (count + x * 2) % (3 * 255);
         int r = 0, g = 0, b = 0;
