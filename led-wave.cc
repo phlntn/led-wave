@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
         if (cx <= 255) {
           b = 255 - cx;
           r = cx;
-        } else if (c <= 511) {
+        } else if (cx <= 511) {
           r = 511 - cx;
           g = cx - 256;
         } else {
