@@ -48,9 +48,13 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int c = (count + y) % 64;
+        float a = 0.5f;
 
-        offscreen_canvas->SetPixel(x, y, c, c, c);
+        int r = 255 * a;
+        int g = 255 * a;
+        int b = 255 * a;
+
+        offscreen_canvas->SetPixel(x, y, r, g, b);
 
       }
     }
