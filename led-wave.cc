@@ -45,12 +45,14 @@ int main(int argc, char *argv[]) {
 
     offscreen_canvas->Clear();
 
+    count++;
+    count %= 3 * 255;
+
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
         // float a = 1.0f;
 
-        count %= 3 * 255;
         int r = 0, g = 0, b = 0;
 
         if (count <= 255) {
@@ -74,7 +76,6 @@ int main(int argc, char *argv[]) {
     
     offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
 
-    count++;
     sleep(1 / 10);
 
   }
