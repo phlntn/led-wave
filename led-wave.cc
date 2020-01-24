@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int cy = (count + y + x / 5) % (height * 2);
+        int cy = (count + y + x / 3) % (height * 2);
 
         if (cy > height) {
           cy = (height * 2) - cy;
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 
     offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
 
-    usleep(1000 / 10);
+    usleep(1000 / 2);
 
   }
 
