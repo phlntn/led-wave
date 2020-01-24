@@ -13,6 +13,9 @@
 #include <stdio.h>
 #include <signal.h>
 
+using std::min;
+using std::max;
+
 using namespace rgb_matrix;
 
 volatile bool interrupt_received = false;
