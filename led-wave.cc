@@ -53,18 +53,18 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int cy = (count + y) % (height * 2);
+        // int cy = (count + y) % (height * 2);
 
-        if (cy > height) {
-          cy = (height * 2) - cy;
-        }
+        // if (cy > height) {
+        //   cy = (height * 2) - cy;
+        // }
 
-        float a = (float)cy / (float)height;
+        // float a = (float)cy / (float)height;
         // a *= abs(1.0f - a * 2.0f) * 0.5f + 0.5f;
-        a *= a;
+        // a *= a;
         // a *= 0.5f;
 
-        int cx = (count + x * 2 + y / 2) % (3 * 255);
+        int cx = (count + x * 2 + y) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (cx <= 255) {
@@ -78,7 +78,8 @@ int main(int argc, char *argv[]) {
           b = cx - 512;
         }
 
-        offscreen_canvas->SetPixel(x, y, r * a, g * a, b * a);
+        // offscreen_canvas->SetPixel(x, y, r * a, g * a, b * a);
+        offscreen_canvas->SetPixel(x, y, r, g, b);
 
       }
     }
