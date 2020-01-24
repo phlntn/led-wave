@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        float a = 0.5f;
+        float a = 0.1f;
 
         int r = 255 * a;
         int g = 255 * a;
