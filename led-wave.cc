@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
 
-  image_gen = new GrayScaleBlock(canvas);
+  ThreadedCanvasManipulator *image_gen = new GrayScaleBlock(canvas);
   image_gen->Start();
 
   // Animation finished. Shut down the RGB matrix.
