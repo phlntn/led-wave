@@ -16,12 +16,12 @@ static void InterruptHandler(int signo) {
 int main(int argc, char *argv[]) {
   RGBMatrix::Options defaults;
 
-  defaults.hardware_mapping = "adafruit-hat-pwm";
+  defaults.hardware_mapping = "adafruit-hat";
   defaults.cols = 64;
   defaults.rows = 64;
   defaults.chain_length = 4;
   defaults.parallel = 1;
-  defaults.show_refresh_rate = false;
+  defaults.show_refresh_rate = true;
 
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
