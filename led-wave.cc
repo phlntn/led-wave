@@ -56,6 +56,7 @@ int main(int argc, char *argv[]) {
         }
 
         float a = (float)cy / (float)height;
+        a *= a;
 
         int cx = (count + x / 2) % (3 * 255);
         int r = 0, g = 0, b = 0;
