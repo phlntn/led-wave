@@ -16,7 +16,7 @@ static void InterruptHandler(int signo) {
 int main(int argc, char *argv[]) {
   RGBMatrix::Options defaults;
 
-  defaults.hardware_mapping = "adafruit-hat";
+  defaults.hardware_mapping = "adafruit-hat-pwm";
   defaults.cols = 64;
   defaults.rows = 64;
   defaults.chain_length = 4;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int cy = (count + y + x / 3) % (height * 2);
+        int cy = (count + y) % (height * 2);
 
         if (cy > height) {
           cy = (height * 2) - cy;
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 
     offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
 
-    usleep(1000 * 10);
+    usleep(1000 * 100);
 
   }
 
