@@ -48,23 +48,25 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        // float a = 1.0f;
+        // int cy = (count + y) % ?
+        float a = 0.5f;
 
-        int c = (count + x) % (3 * 255);
+
+        int cx = (count + x / 2) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
-        if (c <= 255) {
-          r = c;
-          b = 255 - c;
+        if (cx <= 255) {
+          b = 255 - cx;
+          r = cx;
         } else if (c <= 511) {
-          r = 511 - c;
-          g = c - 255;
+          r = 511 - cx;
+          g = cx - 256;
         } else {
-          g = 765 - c;
-          b = c - 511;
+          g = 765 - cx;
+          b = cx - 512;
         }
 
-        offscreen_canvas->SetPixel(x, y, r, g, b);
+        offscreen_canvas->SetPixel(x, y, r * a, g * a, b * a);
 
       }
     }
