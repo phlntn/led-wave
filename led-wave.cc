@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int c = (count + y) % 128;
+        int c = (count + y) % 64;
 
         offscreen_canvas->SetPixel(x, y, c, c, c);
 
