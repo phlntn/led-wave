@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
         // }
 
         float a = (float)y / (float)height;
-        a = a / 2.0f + 0.5f;
+        // a = a / 2.0f + 0.5f;
         // a *= abs(1.0f - a * 2.0f) * 0.5f + 0.5f;
         // a *= a;
         // a *= 0.5f;
