@@ -56,20 +56,7 @@ int main(int argc, char *argv[]) {
     for (int y = 0; y < height; ++y) {
       for (int x = 0; x < width; ++x) {
 
-        int cy = (count + y) % (height * 2);
-
-        if (cy > height) {
-          cy = (height * 2) - cy;
-        }
-
-        // float a = (float)cy / (float)height;
-        // a *= a;
-
-        // float a = sin( ( (float)y + (float)count * 0.05f) / (float)height ) * 0.5f + 0.5;
-
-        float a = sin( (float)y / (float)height * M_PI);
-
-        // int off = round(sin((float)count * 0.05f) * 200.0f * (1.0f - a));
+        float a = sin( ( (float)y + (float)count * 0.05f) / (float)height * M_PI);
 
         int cx = (count + x * 2) % (3 * 255);
         int r = 0, g = 0, b = 0;
