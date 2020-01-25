@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
         float alpha = sin(
           yProg * M_PI // Vertical gradient
           + (float)frame * 0.03f // Constant vertical scrolling
-          + xProg * (float)frame * 3.0f // Wave
+          + xProg * 3.0f // Wave
         );
         alpha = abs(alpha * alpha);
 
