@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
         );
         alpha = abs(alpha * alpha);
 
-        int cx = (int)(128.0f * xProg) % (3 * 255);
+        int cx = (int)(xProg * 256) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (cx <= 255) {
