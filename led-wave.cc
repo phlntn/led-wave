@@ -31,11 +31,11 @@ int main(int argc, char *argv[]) {
   matrix_options.chain_length = 4;
   matrix_options.parallel = 1;
   matrix_options.brightness = 100;
-  matrix_options.pwm_lsb_nanoseconds = 100;
+  // matrix_options.pwm_lsb_nanoseconds = 100;
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
-  runtime_options.gpio_slowdown = 2;
+  runtime_options.gpio_slowdown = 4;
 
   // 
   // 
@@ -85,17 +85,16 @@ int main(int argc, char *argv[]) {
 
         // Brighten towards front
 
-        /*
-        float yProgExp = yProg * yProg * yProg;
+        // float yProgExp = yProg * yProg * yProg;
+        float yProgExp = yProg + cos(xProg * 5.0f + t * 0.07f); // Wave
 
-        r += (int)(yProgExp * 100);
-        g += (int)(yProgExp * 100);
-        b += (int)(yProgExp * 100);
-        */
+        r += (int)(yProgExp * 255);
+        g += (int)(yProgExp * 255);
+        b += (int)(yProgExp * 255);
 
-        r += (int)(yProg * 255);
-        g += (int)(yProg * 255);
-        b += (int)(yProg * 255);
+        r = max(r, 0);
+        g = max(g, 0);
+        b = max(b, 0);
 
         r = min(r, 255);
         g = min(g, 255);
