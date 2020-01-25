@@ -21,32 +21,33 @@ static void InterruptHandler(int signo) {
 }
 
 int main(int argc, char *argv[]) {
-  RGBMatrix::Options defaults;
-
-  defaults.hardware_mapping = "adafruit-hat-pwm";
-  defaults.cols = 64;
-  defaults.rows = 64;
-  defaults.chain_length = 4;
-  defaults.parallel = 1;
-  defaults.gpio_slowdown = 4;
-  defaults.brightness = 100;
-  defaults.pwm_lsb_nanoseconds = 130;
-  defaults.show_refresh_rate = true;
-
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
 
+  RGBMatrix::Options matrix_options;
+  matrix_options.hardware_mapping = "adafruit-hat-pwm";
+  matrix_options.cols = 64;
+  matrix_options.rows = 64;
+  matrix_options.chain_length = 4;
+  matrix_options.parallel = 1;
+  matrix_options.brightness = 100;
+  matrix_options.pwm_lsb_nanoseconds = 130;
+  matrix_options.show_refresh_rate = true;
+
+  rgb_matrix::RuntimeOptions runtime_options;
+  runtime_options.gpio_slowdown = 4;
+
   // 
   // 
   // 
 
-  RGBMatrix *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
-  if (canvas == NULL) return 1;
+  RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, runtime_options);
+  if (matrix == NULL) return 1;
 
   FrameCanvas *offscreen_canvas = canvas->CreateFrameCanvas();
 
-  const int width = canvas->width();
-  const int height = canvas->height();
+  const int width = matrix->width();
+  const int height = matrix->height();
 
   uint32_t count = 0;
 
@@ -75,15 +76,17 @@ int main(int argc, char *argv[]) {
           b = cx - 512;
         }
 
-        offscreen_canvas->SetPixel(x, y, r * a, g * a, b * a);
-        // offscreen_canvas->SetPixel(x, y, r, g, b);
+        offscreen_canvas->SetPixel(
+          x, y, 
+          r * a, g * a, b * a
+        );
 
       }
     }
     
     count++;
 
-    offscreen_canvas = canvas->SwapOnVSync(offscreen_canvas);
+    offscreen_canvas = matrix->SwapOnVSync(offscreen_canvas);
 
     usleep(1000 * 20);
 
@@ -93,8 +96,8 @@ int main(int argc, char *argv[]) {
   // 
   // 
 
-  canvas->Clear();
-  delete canvas;
+  matrix->Clear();
+  delete matrix;
 
   return 0;
 }
