@@ -51,18 +51,24 @@ int main(int argc, char *argv[]) {
 
   uint32_t count = 0;
 
+  float yScrollSpeed = 0.5f;
+
   while (!interrupt_received) {
 
     offscreen_canvas->Clear();
 
     for (int y = 0; y < height; ++y) {
+      float yProg = (float)y / (float)height;
+
       for (int x = 0; x < width; ++x) {
+        float xProg = (float)x / (float)width;
 
-        float a = sin( ( (float)y + (float)count * 0.5f) / (float)height * M_PI);
-        a = abs(a);
-        a *= a;
+        float alpha = sin(
+          yProg * M_PI
+        );
+        alpha = abs(alpha * alpha);
 
-        int cx = (count + x * 2) % (3 * 255);
+        int cx = (count + xProg * 128) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (cx <= 255) {
@@ -78,7 +84,7 @@ int main(int argc, char *argv[]) {
 
         offscreen_canvas->SetPixel(
           x, y, 
-          r * a, g * a, b * a
+          r * alpha, g * alpha, b * alpha
         );
 
       }
