@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
-  runtime_options.gpio_slowdown = 5;
+  runtime_options.gpio_slowdown = 4;
 
   // 
   // 
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
         float alpha = sin(
           yProg * M_PI // Vertical gradient
           + (float)frame * 0.03f // Constant vertical scrolling
-          + xProg // Wave
+          + xProg * (float)frame * 3.0f // Wave
         );
         alpha = abs(alpha * alpha);
 
