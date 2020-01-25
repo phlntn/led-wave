@@ -62,12 +62,12 @@ int main(int argc, char *argv[]) {
 
         // Vertical alpha gradient
 
-        float alpha = sin(
+        float alpha = abs(sin(
           yProg * M_PI // Basic gradient
           + (float)frame * 0.04f // Constant scrolling
           + cos(xProg * 6.0f + (float)frame * 0.04f) * 0.8f // Wave
-        ) * 0.5f + 0.5f;
-        alpha = abs(alpha * alpha);
+        )) * 0.5f + 0.5f;
+        alpha *= alpha;
         alpha *= yProg; // Fade out towards back
 
         // Horizontal hue gradient
