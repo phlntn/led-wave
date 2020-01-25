@@ -9,8 +9,8 @@
 using std::min;
 using std::max;
 using std::abs;
-using std::cos;
 using std::sin;
+using std::cos;
 using std::round;
 
 using namespace rgb_matrix;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
-  runtime_options.gpio_slowdown = 4;
+  runtime_options.gpio_slowdown = 5;
 
   // 
   // 
@@ -49,12 +49,9 @@ int main(int argc, char *argv[]) {
   const int width = matrix->width();
   const int height = matrix->height();
 
-  uint32_t count = 0;
-
-  float yScrollSpeed = 0.5f;
+  uint32_t frame = 0;
 
   while (!interrupt_received) {
-
     offscreen_canvas->Clear();
 
     for (int y = 0; y < height; ++y) {
@@ -63,10 +60,14 @@ int main(int argc, char *argv[]) {
       for (int x = 0; x < width; ++x) {
         float xProg = (float)x / (float)width;
 
+        // Alpha
+
         float alpha = sin(
-          yProg * M_PI
+          yProg * M_PI + (float) frame * 0.03f
         );
         alpha = abs(alpha * alpha);
+
+        // Color
 
         int cx = (int)(xProg * 256) % (3 * 255);
         int r = 0, g = 0, b = 0;
@@ -82,6 +83,8 @@ int main(int argc, char *argv[]) {
           b = cx - 512;
         }
 
+        // Output
+
         offscreen_canvas->SetPixel(
           x, y, 
           r * alpha, g * alpha, b * alpha
@@ -90,12 +93,9 @@ int main(int argc, char *argv[]) {
       }
     }
     
-    count++;
-
+    frame++;
     offscreen_canvas = matrix->SwapOnVSync(offscreen_canvas);
-
     usleep(1000 * 20);
-
   }
 
   // 
