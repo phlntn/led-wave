@@ -50,9 +50,12 @@ int main(int argc, char *argv[]) {
   const int height = matrix->height();
 
   uint32_t frame = 0;
+  float speed = 0.3f;
 
   while (!interrupt_received) {
     offscreen_canvas->Clear();
+
+    float t = (float)frame * speed;
 
     for (int y = 0; y < height; ++y) {
       float yProg = (float)y / (float)height;
@@ -64,11 +67,11 @@ int main(int argc, char *argv[]) {
 
         float alpha = abs(sin(
           yProg * M_PI // Basic gradient
-          + (float)frame * 0.05f // Constant scrolling
-          + cos(xProg * 5.0f + (float)frame * 0.07f) * 0.8f // Wave
+          + t * 0.06f // Constant scrolling
+          + cos(xProg * 5.0f + t * 0.07f) * 0.8f // Wave
         ));
         alpha *= alpha * alpha;
-        alpha = alpha * 0.8f + 0.2f;
+        alpha = alpha * 0.9f + 0.1f;
         alpha *= yProg * (0.5f + yProg * 0.5f); // Fade out towards back
 
         // Horizontal hue gradient
@@ -77,7 +80,7 @@ int main(int argc, char *argv[]) {
 
         int c = (int)(
           xProg * 256 // Basic gradient
-          + (float)frame * 1.0f // Constant scrolling
+          + t * 1.0f // Constant scrolling
         ) % (3 * 255);
 
         if (c <= 255) {
@@ -95,9 +98,9 @@ int main(int argc, char *argv[]) {
 
         float yProgExp = yProg * yProg * yProg;
 
-        r += (int)(yProgExp * 128);
-        g += (int)(yProgExp * 128);
-        b += (int)(yProgExp * 128);
+        r += (int)(yProgExp * 100);
+        g += (int)(yProgExp * 100);
+        b += (int)(yProgExp * 100);
 
         r = min(r, 255);
         g = min(g, 255);
@@ -115,7 +118,7 @@ int main(int argc, char *argv[]) {
     
     frame++;
     offscreen_canvas = matrix->SwapOnVSync(offscreen_canvas);
-    usleep(1000 * 10);
+    usleep(1000 * 5);
   }
 
   // 
