@@ -91,6 +91,16 @@ int main(int argc, char *argv[]) {
           b = c - 512;
         }
 
+        // Brighten
+
+        r += (int)(yProg * 64);
+        g += (int)(yProg * 64);
+        b += (int)(yProg * 64);
+
+        r = min(r, 255);
+        g = min(g, 255);
+        b = min(b, 255);
+
         // Output
 
         offscreen_canvas->SetPixel(
