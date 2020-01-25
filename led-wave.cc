@@ -28,6 +28,9 @@ int main(int argc, char *argv[]) {
   defaults.rows = 64;
   defaults.chain_length = 4;
   defaults.parallel = 1;
+  defaults.gpio_slowdown = 4;
+  defaults.brightness = 100;
+  defaults.pwm_lsb_nanoseconds = 130;
   defaults.show_refresh_rate = true;
 
   signal(SIGTERM, InterruptHandler);
@@ -39,8 +42,6 @@ int main(int argc, char *argv[]) {
 
   RGBMatrix *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL) return 1;
-
-  // canvas->SetBrightness(100);
 
   FrameCanvas *offscreen_canvas = canvas->CreateFrameCanvas();
 
