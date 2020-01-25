@@ -93,9 +93,11 @@ int main(int argc, char *argv[]) {
 
         // Brighten
 
-        r += (int)(yProg * 64);
-        g += (int)(yProg * 64);
-        b += (int)(yProg * 64);
+        float yProg2 = yProg * yProg;
+
+        r += (int)(yProg2 * 96);
+        g += (int)(yProg2 * 96);
+        b += (int)(yProg2 * 96);
 
         r = min(r, 255);
         g = min(g, 255);
