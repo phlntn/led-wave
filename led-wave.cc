@@ -60,18 +60,20 @@ int main(int argc, char *argv[]) {
       for (int x = 0; x < width; ++x) {
         float xProg = (float)x / (float)width;
 
-        // Alpha
+        // Vertical alpha gradient
 
         float alpha = sin(
-          yProg * M_PI // Vertical gradient
-          + (float)frame * 0.03f // Constant vertical scrolling
-          + xProg * 30.0f // Wave
+          yProg * M_PI // Basic gradient
+          + (float)frame * 0.03f // Constant scrolling
         );
         alpha = abs(alpha * alpha);
 
-        // Color
+        // Horizontal hue gradient
 
-        int cx = (int)(xProg * 256) % (3 * 255);
+        int cx = (int)(
+          xProg * 256 // Basic gradient
+          + (float)frame * 0.5f // Constant scrolling
+        ) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
         if (cx <= 255) {
