@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
           + (float)frame * 0.03f // Constant scrolling
           + cos(xProg * 8.0f + (float)frame * 0.05f) * 1.0f // Wave
         );
-        alpha = abs(alpha * alpha);
+        alpha = abs(alpha * alpha * alpha);
 
         // Horizontal hue gradient
 
