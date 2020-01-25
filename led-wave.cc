@@ -66,8 +66,9 @@ int main(int argc, char *argv[]) {
           yProg * M_PI // Basic gradient
           + (float)frame * 0.04f // Constant scrolling
           + cos(xProg * 6.0f + (float)frame * 0.04f) * 0.8f // Wave
-        )) * 0.7f + 0.3f;
-        alpha *= alpha;
+        ));
+        alpha *= alpha * alpha;
+        alpha = alpha * 0.7f + 0.3f
         alpha *= yProg; // Fade out towards back
 
         // Horizontal hue gradient
