@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
   matrix_options.chain_length = 4;
   matrix_options.parallel = 1;
   matrix_options.brightness = 100;
-  // matrix_options.pwm_lsb_nanoseconds = 100;
+  matrix_options.pwm_lsb_nanoseconds = 150;
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
         // Brighten towards front
 
         // float yProgExp = yProg * yProg * yProg;
-        float yProgExp = yProg + cos(xProg * 5.0f + t * 0.07f) * 0.5f; // Wave
+        float yProgExp = yProg + cos(xProg * 5.0f + t * 0.07f) * 0.33f; // Wave
 
         r += (int)(yProgExp * 255);
         g += (int)(yProgExp * 255);
