@@ -68,6 +68,7 @@ int main(int argc, char *argv[]) {
           + cos(xProg * 6.0f + (float)frame * 0.04f) * 0.8f // Wave
         );
         alpha = abs(alpha * alpha);
+        alpha = max(alpha, 0.5f + yProg * 0.5f);
 
         // Horizontal hue gradient
 
