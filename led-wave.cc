@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
-  runtime_options.gpio_slowdown = 4;
+  runtime_options.gpio_slowdown = 2;
 
   // 
   // 
