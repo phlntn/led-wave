@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
   RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, runtime_options);
   if (matrix == NULL) return 1;
 
-  FrameCanvas *offscreen_canvas = canvas->CreateFrameCanvas();
+  FrameCanvas *offscreen_canvas = matrix->CreateFrameCanvas();
 
   const int width = matrix->width();
   const int height = matrix->height();
