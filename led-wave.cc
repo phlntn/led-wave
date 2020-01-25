@@ -31,11 +31,11 @@ int main(int argc, char *argv[]) {
   matrix_options.chain_length = 4;
   matrix_options.parallel = 1;
   matrix_options.brightness = 100;
-  matrix_options.pwm_lsb_nanoseconds = 50;
+  matrix_options.pwm_lsb_nanoseconds = 200;
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
-  runtime_options.gpio_slowdown = 2;
+  runtime_options.gpio_slowdown = 3;
 
   // 
   // 
