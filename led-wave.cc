@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
           + (float)frame * 0.04f // Constant scrolling
           + cos(xProg * 6.0f + (float)frame * 0.04f) * 0.8f // Wave
         ));
-        alpha *= alpha * alpha;
+        // alpha *= alpha * alpha;
         alpha = alpha * 0.8f + 0.2f;
         alpha *= yProg; // Fade out towards back
 
@@ -93,11 +93,11 @@ int main(int argc, char *argv[]) {
 
         // Brighten
 
-        float yProg2 = yProg * yProg;
+        float yProgExp = yProg * yProg * yProg;
 
-        r += (int)(yProg2 * 96);
-        g += (int)(yProg2 * 96);
-        b += (int)(yProg2 * 96);
+        r += (int)(yProgExp * 128);
+        g += (int)(yProgExp * 128);
+        b += (int)(yProgExp * 128);
 
         r = min(r, 255);
         g = min(g, 255);
