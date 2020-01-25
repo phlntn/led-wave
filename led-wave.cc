@@ -63,17 +63,6 @@ int main(int argc, char *argv[]) {
       for (int x = 0; x < width; ++x) {
         float xProg = (float)x / (float)width;
 
-        // Vertical alpha gradient
-
-        float alpha = abs(sin(
-          yProg * M_PI // Basic gradient
-          + t * 0.06f // Constant scrolling
-          + cos(xProg * 5.0f + t * 0.07f) * 0.8f // Wave
-        ));
-        alpha *= alpha * alpha;
-        alpha = alpha * 0.9f + 0.1f;
-        alpha *= yProg * (0.5f + yProg * 0.5f); // Fade out towards back
-
         // Horizontal hue gradient
 
         int r = 0, g = 0, b = 0;
@@ -94,23 +83,46 @@ int main(int argc, char *argv[]) {
           b = c - 512;
         }
 
-        // Brighten
+        // Brighten towards front
 
+        /*
         float yProgExp = yProg * yProg * yProg;
 
         r += (int)(yProgExp * 100);
         g += (int)(yProgExp * 100);
         b += (int)(yProgExp * 100);
+        */
+
+        r += (int)(yProg * 255);
+        g += (int)(yProg * 255);
+        b += (int)(yProg * 255);
 
         r = min(r, 255);
         g = min(g, 255);
         b = min(b, 255);
 
+        // Vertical alpha wave
+
+        /*
+        float alpha = abs(sin(
+          yProg * M_PI // Basic gradient
+          + t * 0.06f // Constant scrolling
+          + cos(xProg * 5.0f + t * 0.07f) * 0.8f // Wave
+        ));
+        alpha *= alpha * alpha;
+        alpha = alpha * 0.9f + 0.1f;
+        alpha *= yProg * (0.5f + yProg * 0.5f); // Fade out towards back
+
+        r *= alpha;
+        g *= alpha;
+        b *= alpha;
+        */
+
         // Output
 
         offscreen_canvas->SetPixel(
           x, y, 
-          r * alpha, g * alpha, b * alpha
+          r, g, b
         );
 
       }
