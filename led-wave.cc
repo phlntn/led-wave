@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
   matrix_options.chain_length = 4;
   matrix_options.parallel = 1;
   matrix_options.brightness = 100;
-  matrix_options.pwm_lsb_nanoseconds = 100;
+  matrix_options.pwm_lsb_nanoseconds = 80;
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
