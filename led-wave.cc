@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
     
     frame++;
     offscreen_canvas = matrix->SwapOnVSync(offscreen_canvas);
-    usleep(1000 * 20);
+    usleep(1000 * 10);
   }
 
   // 
