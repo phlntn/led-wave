@@ -29,13 +29,11 @@ int main(int argc, char *argv[]) {
   matrix_options.cols = 64;
   matrix_options.rows = 64;
   matrix_options.chain_length = 4;
-  matrix_options.parallel = 1;
-  matrix_options.brightness = 100;
   matrix_options.pwm_lsb_nanoseconds = 50;
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
-  runtime_options.gpio_slowdown = 2;
+  runtime_options.gpio_slowdown = 3;
 
   // 
   // 
@@ -129,7 +127,7 @@ int main(int argc, char *argv[]) {
     
     frame++;
     offscreen_canvas = matrix->SwapOnVSync(offscreen_canvas);
-    usleep(1000 * 5);
+    usleep(1000 * 1);
   }
 
   // 
