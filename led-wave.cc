@@ -65,26 +65,28 @@ int main(int argc, char *argv[]) {
         float alpha = sin(
           yProg * M_PI // Basic gradient
           + (float)frame * 0.03f // Constant scrolling
+          + cos(xProg + (float)frame * 0.03f)
         );
         alpha = abs(alpha * alpha);
 
         // Horizontal hue gradient
 
-        int cx = (int)(
-          xProg * 256 // Basic gradient
-          + (float)frame * 0.5f // Constant scrolling
-        ) % (3 * 255);
         int r = 0, g = 0, b = 0;
 
-        if (cx <= 255) {
-          b = 255 - cx;
-          r = cx;
-        } else if (cx <= 511) {
-          r = 511 - cx;
-          g = cx - 256;
+        int c = (int)(
+          xProg * 256 // Basic gradient
+          + (float)frame * 1.0f // Constant scrolling
+        ) % (3 * 255);
+
+        if (c <= 255) {
+          b = 255 - c;
+          r = c;
+        } else if (c <= 511) {
+          r = 511 - c;
+          g = c - 256;
         } else {
-          g = 765 - cx;
-          b = cx - 512;
+          g = 765 - c;
+          b = c - 512;
         }
 
         // Output
