@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
         ));
         alpha *= alpha * alpha;
         alpha = alpha * 0.8f + 0.2f;
-        alpha *= yProg; // Fade out towards back
+        alpha *= yProg * yProg; // Fade out towards back
 
         // Horizontal hue gradient
 
@@ -95,9 +95,9 @@ int main(int argc, char *argv[]) {
 
         float yProgExp = yProg * yProg * yProg;
 
-        r += (int)(yProgExp * 96);
-        g += (int)(yProgExp * 96);
-        b += (int)(yProgExp * 96);
+        r += (int)(yProgExp * 128);
+        g += (int)(yProgExp * 128);
+        b += (int)(yProgExp * 128);
 
         r = min(r, 255);
         g = min(g, 255);
