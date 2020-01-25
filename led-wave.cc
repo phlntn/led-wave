@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
   matrix_options.show_refresh_rate = true;
 
   rgb_matrix::RuntimeOptions runtime_options;
-  runtime_options.gpio_slowdown = 4;
+  runtime_options.gpio_slowdown = 3;
 
   // 
   // 
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
         // Brighten towards front
 
         // float yProgExp = yProg * yProg * yProg;
-        float yProgExp = yProg + cos(xProg * 5.0f + t * 0.07f); // Wave
+        float yProgExp = yProg + cos(xProg * 5.0f + t * 0.07f) * 0.5f; // Wave
 
         r += (int)(yProgExp * 255);
         g += (int)(yProgExp * 255);
